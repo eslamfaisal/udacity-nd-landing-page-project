@@ -22,7 +22,7 @@ h1 {
 /**
 * responsive hero style x
  */
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
     h1 {
         font-size: 7em;
         margin: 2em 4rem 1em;
@@ -64,7 +64,7 @@ blockquote {
     text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
     .section__container {
         max-width: 50em;
         padding: 4em;
@@ -84,6 +84,18 @@ section:nth-of-type(even) .section__container {
     top: 0;
     width: 100%;
     z-index: 5;
+}
+
+.hide_navbar__list {
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    display: none;
+
+}
+
+.show_navbar__list {
+    display: block;
+    opacity: 1;
 }
 
 /* Navigation Styles*/
@@ -109,6 +121,24 @@ section:nth-of-type(even) .section__container {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
+}
+
+/* ---- Theme State Rules ---- */
+/* Section Active Styles */
+/* Note: current-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+section.current-active-class {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+section.current-active-class .section__container::before {
+    opacity: 1;
+    animation: rotate 4s linear 0s infinite forwards;
+}
+
+section.current-active-class .section__container::after {
+    opacity: 1;
+    animation: rotate 5s linear 0s infinite forwards reverse;
 }
 
 /* Footer Styles */
