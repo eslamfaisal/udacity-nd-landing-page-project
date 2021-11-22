@@ -3,6 +3,7 @@
  */
 const sections = document.querySelectorAll('section');
 const navBarList = document.querySelector('#navbar__list');
+let prevScrollpos = window.pageYOffset
 
 /**
  * end define variables
@@ -27,68 +28,65 @@ function getVisibleSectionIndex() {
     return visibleSectionIndex;
 }
 
+
 /**
- * create class to handle app view
+ * create nav list based on sections
  */
-class MyApp {
+function createNav() {
+    const fragment = document.createDocumentFragment();
+    sections.forEach(section => {
+        const listItemTag = document.createElement("li")
+        const anchorTag = document.createElement("a")
 
-    constructor() {
-        this.createNav();
-        this.addScrollListener()
-    }
+        anchorTag.innerText = section.getAttribute('data-sec-name');
+        anchorTag.classList.add("menu__link");
 
-
-    /**
-     * create nav list based on sections
-     */
-    createNav() {
-        const fragment = document.createDocumentFragment();
-        sections.forEach(section => {
-            const listItemTag = document.createElement("li")
-            const anchorTag = document.createElement("a")
-
-            anchorTag.innerText = section.getAttribute('data-sec-name');
-            anchorTag.classList.add("menu__link");
-
-            anchorTag.addEventListener("click", () => {
-                section.scrollIntoView({behavior: "smooth"});
-            });
-
-            listItemTag.appendChild(anchorTag);
-            fragment.appendChild(listItemTag);
-
+        anchorTag.addEventListener("click", () => {
+            section.scrollIntoView({behavior: "smooth"});
         });
-        navBarList.appendChild(fragment);
-    }
 
-    setActiveSection() {
-        let visibleSectionIndex = getVisibleSectionIndex();
+        listItemTag.appendChild(anchorTag);
+        fragment.appendChild(listItemTag);
 
-        // If visibleSection exists
-        if (visibleSectionIndex !== -1) {
-            // create a list of Atags from navigation menu
-            let navATagList = document.querySelectorAll('.menu__link');
-
-            // Loop through all section
-            for (let i = 0; i < sections.length; i++) {
-                // For section in viewport: Add active state to the section and navigation
-                if (i === visibleSectionIndex) {
-                    sections[i].classList.add('current-active-class');
-                    navATagList[i].classList.add('current-active-class');
-                }
-                // For other sections: Remove active state from the section and navigation
-                else {
-                    sections[i].classList.remove('current-active-class');
-                    navATagList[i].classList.remove('current-active-class');
-                }
-            }
-        }
-    }
-
-    addScrollListener() {
-        document.addEventListener('scroll', this.setActiveSection);
-    }
+    });
+    navBarList.appendChild(fragment);
 }
 
+function setActiveSection() {
+    let visibleSectionIndex = getVisibleSectionIndex();
 
-new MyApp()
+
+    if (visibleSectionIndex !== -1) {
+
+        let navATagList = document.querySelectorAll('.menu__link');
+
+        sections.forEach(function (section, index) {
+            if (index === visibleSectionIndex) {
+                section.classList.add('current-active-class');
+                navATagList[index].classList.add('current-active-class');
+            } else {
+                section.classList.remove('current-active-class');
+                navATagList[index].classList.remove('current-active-class');
+            }
+
+        })
+
+    }
+
+    const currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos && navBarList.classList.contains('hide_navbar__list')) {
+        navBarList.classList.add('show_navbar__list')
+        navBarList.classList.remove('hide_navbar__list')
+    } else if (prevScrollpos < currentScrollPos && !navBarList.classList.contains('hide_navbar__list')) {
+        navBarList.classList.add('hide_navbar__list')
+        navBarList.classList.remove('show_navbar__list')
+    }
+    prevScrollpos = currentScrollPos
+}
+
+function addScrollListener() {
+    document.addEventListener('scroll', this.setActiveSection,);
+}
+
+createNav();
+addScrollListener()
