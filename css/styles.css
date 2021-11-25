@@ -127,12 +127,12 @@ section.current-active-class {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-section.current-active-class .landing__container::before {
+section.current-active-class .section__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.current-active-class .landing__container::after {
+section.current-active-class .section__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
