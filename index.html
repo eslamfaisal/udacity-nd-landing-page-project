@@ -97,6 +97,30 @@
 <footer class="page__footer">
     <p>&copy Udacity</p>
 </footer>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyAGxACNqy2NSR5E2f1KKxQqgGLIJjtF2ps",
+        authDomain: "cvbox-6ac06.firebaseapp.com",
+        databaseURL: "https://cvbox-6ac06.firebaseio.com",
+        projectId: "cvbox-6ac06",
+        storageBucket: "cvbox-6ac06.appspot.com",
+        messagingSenderId: "126947925179",
+        appId: "1:126947925179:web:7c39f1b0aafcf7f11add9e",
+        measurementId: "G-LNF1XCJ6PF"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+</script>
 <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
