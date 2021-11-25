@@ -3,7 +3,6 @@
  */
 const sections = document.querySelectorAll('section');
 const navBarList = document.querySelector('#navbar__list');
-let prevScrollpos = window.pageYOffset
 
 /**
  * end define variables
@@ -41,7 +40,8 @@ function createNav() {
         anchorTag.innerText = section.getAttribute('data-sec-name');
         anchorTag.classList.add("menu__link");
 
-        anchorTag.addEventListener("click", () => {
+        anchorTag.addEventListener("click", (event) => {
+            event.preventDefault()
             section.scrollIntoView({behavior: "smooth"});
         });
 
@@ -55,7 +55,6 @@ function createNav() {
 function setActiveSection() {
     let visibleSectionIndex = getVisibleSectionIndex();
 
-
     if (visibleSectionIndex !== -1) {
 
         let navATagList = document.querySelectorAll('.menu__link');
@@ -68,20 +67,9 @@ function setActiveSection() {
                 section.classList.remove('current-active-class');
                 navATagList[index].classList.remove('current-active-class');
             }
-
         })
-
     }
 
-    const currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos && navBarList.classList.contains('hide_navbar__list')) {
-        navBarList.classList.add('show_navbar__list')
-        navBarList.classList.remove('hide_navbar__list')
-    } else if (prevScrollpos < currentScrollPos && !navBarList.classList.contains('hide_navbar__list')) {
-        navBarList.classList.add('hide_navbar__list')
-        navBarList.classList.remove('show_navbar__list')
-    }
-    prevScrollpos = currentScrollPos
 }
 
 function addScrollListener() {

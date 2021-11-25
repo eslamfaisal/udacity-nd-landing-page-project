@@ -86,17 +86,6 @@ section:nth-of-type(even) .section__container {
     z-index: 5;
 }
 
-.hide_navbar__list {
-    display: none;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-}
-
-.show_navbar__list {
-    display: block;
-    opacity: 1;
-}
-
 /* Navigation Styles*/
 .navbar__menu ul {
     padding-left: 0;
